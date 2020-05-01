@@ -13,8 +13,9 @@ import {
   MatCardModule,
   MatButtonModule,
   MatProgressSpinnerModule,
+  MatListModule,
 } from '@angular/material';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 @NgModule({
   declarations: [AppComponent, HomeComponent, AboutComponent],
   imports: [
@@ -27,6 +28,8 @@ import {
     MatButtonModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatListModule,
+    MatButtonToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent],
