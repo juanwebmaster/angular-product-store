@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ProductComponent } from './home/product/product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import {
   MatToolbarModule,
   MatIconModule,
@@ -31,6 +32,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatProgressSpinnerModule,
     MatListModule,
     MatButtonToggleModule,
+    ScrollingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

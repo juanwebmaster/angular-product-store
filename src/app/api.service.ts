@@ -16,6 +16,7 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) {}
 
+  //Error handling
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
     if (error.error instanceof ErrorEvent) {
@@ -27,11 +28,25 @@ export class ApiService {
     return throwError(errorMessage);
   }
 
-  public get() {
-    return this.httpClient.get(this.SERVER_URL);
+  public sendGetRequest() {
+    return this.httpClient.get(this.SERVER_URL, { observe: 'response' }).pipe(
+      retry(3),
+      catchError(this.handleError),
+      tap((res) => {
+        console.log(res.headers.get('Link'));
+      })
+    );
   }
 
-  public getItem(id) {
-    return this.httpClient.get(this.SERVER_URL + '/' + id);
+  public sendGetItemRequest(id) {
+    return this.httpClient
+      .get(this.SERVER_URL + '/' + id, { observe: 'response' })
+      .pipe(
+        retry(3),
+        catchError(this.handleError),
+        tap((res) => {
+          console.log(res.headers.get('Link'));
+        })
+      );
   }
 }

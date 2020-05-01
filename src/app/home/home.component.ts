@@ -14,15 +14,29 @@ export class HomeComponent implements OnInit {
   products = [];
   constructor(private apiService: ApiService) {}
 
+  //Get Product item when you select one product.
   onClickProduct(id): void {
-    this.apiService.getItem(id).subscribe((data: any[]) => {
-      this.selectedProduct = data;
-      console.log(this.selectedProduct.imageUrl);
-    });
+    this.apiService
+      .sendGetItemRequest(id)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: HttpResponse<any>) => {
+        console.log(res);
+        this.selectedProduct = res.body;
+      });
   }
+
+  //Get the Products list.
   ngOnInit(): void {
-    this.apiService.get().subscribe((data: any[]) => {
-      this.products = data;
-    });
+    this.apiService
+      .sendGetRequest()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((res: HttpResponse<any>) => {
+        console.log(res);
+        this.products = res.body;
+      });
+  }
+
+  trackByFn(index, item) {
+    return index; // or item.id
   }
 }

@@ -1,11 +1,11 @@
 <div style="display: flex;">
   <mat-button-toggle-group vertical name="productList">
-    <mat-button-toggle
-      *ngFor="let product of products"
-      (click)="onClickProduct(product.id)"
-    >
-      {{ product.name }}
-    </mat-button-toggle>
+      <mat-button-toggle
+        *ngFor="let product of products; trackBy: trackByFn"
+        (click)="onClickProduct(product.id)"
+      >
+        {{ product.name }}
+      </mat-button-toggle>
   </mat-button-toggle-group>
   <app-product [selectedProduct]="selectedProduct"></app-product>
 </div>
